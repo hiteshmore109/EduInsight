@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+{% block style %}
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-top: 50px;
+    }
+
+    .subtitle {
+        border-top: 2px solid #007bff;
+        margin-top: 10px;
+        padding-top: 10px;
+        color: #6c757d;
+    }
+
+    h1 {
+        color: #343a40;
+    }
+
+    .card {
+        background-color: #f1f1f1;
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .card-title {
+        color: #007bff;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #218838;
+    }
+</style>
+{% endblock style %}
+{% block body %}
+<div class="container">
+    <h1 class="text-center">Welcome to EduInsight</h1>
+    <p class="subtitle text-center">An innovative class result prediction system designed for educational institutions
+    </p>
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card text-center mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Predict Result for Individual</h5>
+                    <p class="card-text">Click the button below to predict results for an individual.</p>
+                    <a href="/individual-prediction" class="btn btn-primary">Go to Individual's Result Prediction</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Predict Result for Class</h5>
+                    <p class="card-text">Click the button below to predict results for a class.</p>
+                    <a href="/class-prediction" class="btn btn-success">Go to Class' Result Prediction</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

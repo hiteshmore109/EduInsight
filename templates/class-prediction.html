@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Class Result Prediction{% endblock title %}
+{% block body %}
+<div class="container mt-5">
+    <h1 class="display-4 fw-bold">Upload Your Valuable Data</h1>
+    <p class="lead mb-4">Please select the three required CSV files containing your data.</p>
+    <form action="/class-prediction" method="post" enctype="multipart/form-data">
+        <div class="row g-3 mb-3">
+            <div class="col-md-12">
+                <label for="file1" class="form-label">File 1:</label>
+                <input type="file" class="form-control" id="file1" name="file1" accept=".csv" required>
+            </div>
+            <div class="col-md-12">
+                <label for="file2" class="form-label">File 2:</label>
+                <input type="file" class="form-control" id="file2" name="file2" accept=".csv" required>
+            </div>
+            <div class="col-md-12">
+                <label for="file3" class="form-label">File 3:</label>
+                <input type="file" class="form-control" id="file3" name="file3" accept=".csv" required>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg w-100">Upload Now!</button>
+    </form>
+</div>
+
+<script>
+    // JavaScript to handle form submission
+    document.getElementById('csvForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Add your code to handle the form submission here
+      alert('Form submitted!');
+    });
+  </script>
+{% endblock body %}
