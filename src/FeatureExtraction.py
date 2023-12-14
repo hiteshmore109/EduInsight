@@ -6,16 +6,31 @@ def calculate_credits(marks):
 def calculate_practical_percentage(marks):
     return marks // 0.5
 
-def get_combined_sgpa(sem1, sem2, sem3):
+# def get_combined_sgpa(sem1, sem2, sem3):
+#     df = pd.DataFrame()
+#     df['Combined name'] = sem1['Combined name']
+#     semesters = ['Sem1', 'Sem2', 'Sem3']
+#     sgpa_dfs = [sem1, sem2, sem3]
+#     for semester, sgpa_df in zip(semesters, sgpa_dfs):
+#         df = pd.merge(df, sgpa_df[['Combined name', 'GPA']], on='Combined name', how='outer')
+#         df = df.rename(columns={'GPA': semester})
+#     df.iloc[:, 1:] = df.iloc[:, 1:].map(lambda x: 0 if x < 4 else x)
+#     df[semesters] = df[semesters].fillna(df[semesters].median())
+#     return df
+
+def get_combined_sgpa(*semesters):
     df = pd.DataFrame()
-    df['Combined name'] = sem1['Combined name']
-    semesters = ['Sem1', 'Sem2', 'Sem3']
-    sgpa_dfs = [sem1, sem2, sem3]
-    for semester, sgpa_df in zip(semesters, sgpa_dfs):
-        df = pd.merge(df, sgpa_df[['Combined name', 'GPA']], on='Combined name', how='outer')
-        df = df.rename(columns={'GPA': semester})
+    df['Combined name'] = semesters[0]['Combined name']
+    
+    semester_names = [f'Sem{i+1}' for i in range(len(semesters))]
+    
+    for semester, semester_name in zip(semesters, semester_names):
+        df = pd.merge(df, semester[['Combined name', 'GPA']], on='Combined name', how='outer')
+        df = df.rename(columns={'GPA': semester_name})
+    
     df.iloc[:, 1:] = df.iloc[:, 1:].map(lambda x: 0 if x < 4 else x)
-    df[semesters] = df[semesters].fillna(df[semesters].median())
+    df[semester_names] = df[semester_names].fillna(df[semester_names].median())
+    
     return df
 
 def get_sgpa(sem_data):
