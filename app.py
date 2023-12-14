@@ -1,6 +1,10 @@
+import pickle
 from flask import Flask, render_template, request
+import numpy as np
 from src.DataCleaning import clean_data
 from src.FeatureExtraction import get_combined_sgpa, get_sgpa
+
+linear_model = pickle.load(open('models/model.pkl', 'rb'))
 
 app = Flask(__name__)
 
@@ -30,6 +34,10 @@ def class_prediction():
     sem3_sgpa = get_sgpa(sem3_cleaned)
 
     result = get_combined_sgpa(sem1_sgpa, sem2_sgpa, sem3_sgpa)
+
+    predict = list(np.round(linear_model.predict(result.iloc[:, 1:]), decimals=1))
+    predict = [0 if x < 4 else x for x in predict ]
+    result['Sem4_Predicted'] = predict
 
     return result.to_html(classes='table table-striped', render_links=True, escape=False) 
 
