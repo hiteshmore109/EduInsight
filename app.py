@@ -1,5 +1,6 @@
+import io
 import pickle
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file
 import numpy as np
 import pandas as pd
 
@@ -56,7 +57,20 @@ def class_prediction():
     predict = [0 if x < 4 else x for x in predict ]
     result['Sem4_Predicted'] = predict
 
-    return result.to_html(classes='table table-striped', render_links=True, escape=False) 
+    # return jsonify(result.to_dict(orient='records'))
+    result_csv = result.to_csv(index=False)  # Convert DataFrame to CSV string
+
+    # Create an in-memory file-like object
+    csv_file = io.BytesIO(result_csv.encode())
+
+    # Send the file for download
+    return send_file(
+        csv_file,
+        mimetype='text/csv',
+        as_attachment=True,
+        download_name='predicted_data.csv',
+        conditional=True
+    )
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

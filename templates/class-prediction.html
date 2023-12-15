@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <h1 class="display-4 fw-bold">Get prediction for 4th Semester of the class</h1>
     <p class="lead mb-4">Please select the three required CSV files containing your data.</p>
-    <form action="{{ url_for('class_prediction')}}" method="post" enctype="multipart/form-data">
+    <form id='csvForm' action="{{ url_for('class_prediction')}}" method="post" enctype="multipart/form-data">
         <div class="row g-3 mb-3">
             <div class="col-md-12">
                 <label for="sem1" class="form-label">Sem 1 Data:</label>
@@ -23,12 +23,4 @@
     </form>
 </div>
 
-<script>
-    // JavaScript to handle form submission
-    document.getElementById('csvForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      // Add your code to handle the form submission here
-      alert('Form submitted!');
-    });
-  </script>
 {% endblock body %}
