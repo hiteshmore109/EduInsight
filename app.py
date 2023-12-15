@@ -1,6 +1,8 @@
 import pickle
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import numpy as np
+import pandas as pd
+
 from src.DataCleaning import clean_data
 from src.FeatureExtraction import get_combined_sgpa, get_sgpa
 
@@ -15,7 +17,22 @@ def home():
 
 @app.route('/individual-prediction', methods=['GET', 'POST'])
 def individual_prediction():
-    return render_template('individual-prediction.html')
+    if request.method == 'GET':
+        return render_template('individual-prediction.html')
+    sem1 = request.form["sem1"]
+    sem2 = request.form["sem2"]
+    sem3 = request.form["sem3"]
+
+    new_data = {
+    'Sem1': [sem1],
+    'Sem2': [sem2],
+    'Sem3': [sem3]
+}
+    df = pd.DataFrame(new_data)
+
+    predict = np.round(linear_model.predict(df), decimals=1)
+
+    return jsonify({'prediction': predict[0]})
 
 @app.route('/class-prediction', methods=['GET', 'POST'])
 def class_prediction():
