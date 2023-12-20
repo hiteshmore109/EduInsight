@@ -1,3 +1,9 @@
+"""
+SGPA Prediction Web Application
+
+This Flask application provides a web interface for predicting 
+Semester 4 (Sem4) SGPA for individual and class data.
+"""
 import io
 import pickle
 from flask import Flask, render_template, request, jsonify, send_file
@@ -7,7 +13,8 @@ import pandas as pd
 from src.DataCleaning import clean_data
 from src.FeatureExtraction import get_combined_sgpa, get_sgpa
 
-sem4_model = pickle.load(open("models/sem4_model.pkl", "rb"))
+with open("models/sem4_model.pkl", "rb") as model_file:
+    sem4_model = pickle.load(model_file)
 
 app = Flask(__name__)
 
@@ -15,11 +22,13 @@ app = Flask(__name__)
 @app.route("/", methods=["GET"])
 @app.route("/home", methods=["GET"])
 def home():
+    """Render the home page."""
     return render_template("index.html")
 
 
 @app.route("/individual-prediction", methods=["GET", "POST"])
 def individual_prediction():
+    """Endpoint for individual SGPA prediction."""
     if request.method == "GET":
         return render_template("individual-prediction.html")
     sem1 = request.form["sem1"]
@@ -36,6 +45,7 @@ def individual_prediction():
 
 @app.route("/class-prediction", methods=["GET", "POST"])
 def class_prediction():
+    """Endpoint for class SGPA prediction."""
     if request.method == "GET":
         return render_template("class-prediction.html")
     sem1 = request.files["sem1"]
@@ -73,4 +83,4 @@ def class_prediction():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000)

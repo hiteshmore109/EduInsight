@@ -1,15 +1,30 @@
+"""
+Model Training Script
+
+This script trains a Ridge Regression model to predict Semester 4 
+(Sem4) SGPA based on the SGPA data from previous semesters.
+It also creates a pickle file of the trained model when run exclusively.
+
+Author: [Your Name]
+"""
 import cloudpickle
 import numpy as np
 import pandas as pd
-from sklearn.linear_model import LinearRegression, Ridge
-from sklearn.metrics import mean_squared_error, r2_score, explained_variance_score
+from sklearn.linear_model import Ridge
 from sklearn.model_selection import train_test_split, GridSearchCV
 
 from DataCleaning import clean_data
 from FeatureExtraction import get_combined_sgpa, get_sgpa
 
 
-def load_data():
+def load_data() -> pd.DataFrame:
+    """
+    Load the necessary data required to train the model and return the 
+    DataFrame of the combined data with SGPA.
+
+    Returns:
+    - pd.DataFrame: A DataFrame containing combined SGPA data from multiple semesters.
+    """
     sem1 = "../data/FY- Sem I 2021-22 Marksheet.csv"
     sem2 = "../data/FY- Sem II 2021-22 Marksheet.csv"
     sem3 = "../data/SY- Sem III 2022-23October 2022 Marksheet.csv"
@@ -30,6 +45,15 @@ def load_data():
 
 
 def sem4_model(result: pd.DataFrame):
+    """
+    Train the required model using Ridge Regression with hyperparameter tuning.
+
+    Parameters:
+    - result (pd.DataFrame): A DataFrame containing combined SGPA data from multiple semesters.
+
+    Returns:
+    - Ridge: The trained Ridge Regression model.
+    """
     features = ["Sem1", "Sem2", "Sem3"]
     target = "Sem4"
 
@@ -57,18 +81,6 @@ def sem4_model(result: pd.DataFrame):
     best_ridge_model = Ridge(alpha=best_alpha)
     best_ridge_model.fit(X_train, y_train)
 
-    # # Make predictions on the testing set
-    # y_pred = best_ridge_model.predict(X_test)
-
-    # # Create and train the linear regression model
-    # linear_model = LinearRegression()
-    # linear_model.fit(X_train, y_train)
-
-    # # Make predictions on the testing set
-    # y_pred = linear_model.predict(X_test)
-
-    # print(f"Mean Squared Error: {mse}")
-    # print(f"R-squared: {r2}")
     return best_ridge_model
 
 
@@ -84,10 +96,10 @@ if __name__ == "__main__":
 
     data = load_data()
 
-    ridge_model = sem4_model(data)
+    ridge = sem4_model(data)
 
     # Make predictions for the new data
-    new_predictions = list(np.round(ridge_model.predict(new_df), decimals=1))
+    new_predictions = list(np.round(ridge.predict(new_df), decimals=1))
     new_df["Sem4_Predicted"] = new_predictions
 
     # Display the predictions
@@ -98,4 +110,4 @@ if __name__ == "__main__":
 
     # Save the function to a pickle file
     with open("../models/sem4_model.pkl", "wb") as f:
-        cloudpickle.dump(ridge_model, f)
+        cloudpickle.dump(ridge, f)
