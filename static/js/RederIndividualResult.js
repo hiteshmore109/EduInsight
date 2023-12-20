@@ -2,6 +2,17 @@ function getPrediction(event) {
     // Prevent the form from submitting normally
     event.preventDefault();
 
+    // Get the form element
+    var form = document.getElementById('predictionForm');
+
+    // Check if the form is valid
+    if (!form.checkValidity()) {
+        // If the form is not valid, submit it to trigger the browser's default validation
+        form.reportValidity();
+        // Return false to prevent the form from being submitted
+        return false;
+    }
+
     // Show a loading message
     document.getElementById('predictionResult').innerHTML = 'Predicting...';
 
