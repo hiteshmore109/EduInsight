@@ -1,6 +1,6 @@
 
 
-# EduInsight- 
+# EduInsight
 
 This is a Flask web application that predicts the Semester 4 (Sem4) SGPA for individual and class data.
 
