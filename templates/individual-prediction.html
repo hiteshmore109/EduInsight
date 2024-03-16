@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Individual Prediction{% endblock title %}
+{% block body %}
+<div class="container mt-5">
+    <h1 class="display-4 fw-bold">Get prediction for the selected Semester for a student</h1>
+    <p class="lead mb-4">Please provide the marks of the student(in <b>S.G.P.A</b> upto 2 decimal numbers).</p>
+    <form id="predictionForm" onsubmit="return getPrediction();" data-url="{{ url_for('individual_prediction')}}"
+        method="post" enctype="multipart/form-data">
+        <div class="row g-3 mb-3">
+            <!-- <div class="col-md-12">
+                <label for="sem1" class="form-label">Sem 1 Marks:</label>
+                <input type="number" step="0.01" class="form-control" id="sem1" name="sem1" required>
+            </div>
+            <div class="col-md-12">
+                <label for="sem2" class="form-label">Sem 2 Marks:</label>
+                <input type="number" step="0.01" class="form-control" id="sem2" name="sem2" required>
+            </div>
+            <div class="col-md-12">
+                <label for="sem3" class="form-label">Sem 3 Marks:</label>
+                <input type="number" step="0.01" class="form-control" id="sem3" name="sem3" required>
+            </div> -->
+            <div class="col-md-12">
+                <label for="semesterCount" class="form-label">Select the semester: </label>
+                <select id="semesterCount" class="form-select" onchange="renderSemesterFields();" required>
+                    <option value="">Select</option>
+                    <option value="1">Sem2</option>
+                    <option value="2">Sem3</option>
+                    <option value="3">Sem4</option>
+                    <option value="4">Sem5</option>
+                    <option value="5" disabled>Sem6</option>
+                </select>
+            </div>
+            <div class="col-md-12" id="semesterFields"></div>
+            <div class="col-md-12" id="predictionResult"></div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg w-100" onclick="getPrediction(event);">Get
+            Prediction</button>
+    </form>
+</div>
+<script src="{{ url_for('static', filename='js/RederIndividualResult.js') }}"></script>
+{% endblock body %}

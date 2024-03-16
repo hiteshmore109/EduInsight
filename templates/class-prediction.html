@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Class Result Prediction{% endblock title %}
+{% block body %}
+<div class="container mt-5">
+    <h1 class="display-4 fw-bold">Get prediction for the selected Semester of the class</h1>
+    <p class="lead mb-4">Please select the required CSV files containing your data.</p>
+    <form id='csvForm' action="{{ url_for('class_prediction')}}" method="post" enctype="multipart/form-data">
+        <div class="row g-3 mb-3">
+            <div class="col-md-12">
+                <label for="semesterCount" class="form-label">Select the prediciton semester: </label>
+                <select id="semesterCount" class="form-select" onchange="renderSemesterInputs();" required>
+                    <option value="">Select</option>
+                    <option value="1">2nd Semester</option>
+                    <option value="2">3rd Semester</option>
+                    <option value="3">4th Semester</option>
+                    <option value="4">5th Semester</option>
+                    <option value="5" disabled>6 Semesters</option>
+                </select>
+            </div>
+            <div id="semesterInputs"></div>
+            <!-- <div class="col-md-12">
+                <label for="sem1" class="form-label">Sem 1 Data:</label>
+                <input type="file" class="form-control" id="sem1" name="sem1" accept=".csv" required>
+            </div>
+            <div class="col-md-12">
+                <label for="sem2" class="form-label">Sem 2 Data:</label>
+                <input type="file" class="form-control" id="sem2" name="sem2" accept=".csv" required>
+            </div>
+            <div class="col-md-12">
+                <label for="sem3" class="form-label">Sem 3 Data:</label>
+                <input type="file" class="form-control" id="sem3" name="sem3" accept=".csv" required>
+            </div> -->
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg w-100">Get Prediction</button>
+    </form>
+    <div class="col-md-12" id="predictionResult"></div>
+</div>
+<script src="{{ url_for('static', filename='js/ClassPrediction.js') }}"></script>
+{% endblock body %}
