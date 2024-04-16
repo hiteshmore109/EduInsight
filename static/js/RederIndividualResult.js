@@ -58,6 +58,8 @@ function renderSemesterFields() {
         input.setAttribute('class', 'form-control');
         input.setAttribute('id', 'sem' + i);
         input.setAttribute('name', 'sem' + i);
+        input.setAttribute('min', '0');
+        input.setAttribute('max', '10');
         input.setAttribute('required', '');
         
         var div = document.createElement('div');
