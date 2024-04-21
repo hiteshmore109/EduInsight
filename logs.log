@@ -1,0 +1,167 @@
+2024-04-21 04:33:42,374 - INFO - Serving on http://0.0.0.0:5000
+2024-04-21 04:49:59,059 - INFO - Serving on http://0.0.0.0:5000
+2024-04-21 04:50:06,931 - INFO - Home page: Accessed Successfully
+2024-04-21 04:50:12,026 - INFO - Individual Prediction: Accessed Successfully
+2024-04-21 04:50:32,003 - INFO - Individual Prediction: Successfully received the data for following semesters: ['9.1', '8.5', '9.1', '9.1']
+2024-04-21 04:53:37,561 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-04-21 04:53:37,561 - INFO - [33mPress CTRL+C to quit[0m
+2024-04-21 04:53:37,572 - INFO -  * Restarting with stat
+2024-04-21 04:53:46,210 - INFO - Home page: Accessed Successfully
+2024-04-21 04:53:46,240 - INFO - 127.0.0.1 - - [21/Apr/2024 04:53:46] "GET / HTTP/1.1" 200 -
+2024-04-21 04:53:46,624 - INFO - 127.0.0.1 - - [21/Apr/2024 04:53:46] "[36mGET /static/favicon.ico HTTP/1.1[0m" 304 -
+2024-04-21 04:53:50,204 - INFO - Individual Prediction: Accessed Successfully
+2024-04-21 04:53:50,204 - INFO - 127.0.0.1 - - [21/Apr/2024 04:53:50] "GET /individual-prediction HTTP/1.1" 200 -
+2024-04-21 04:53:50,290 - INFO - 127.0.0.1 - - [21/Apr/2024 04:53:50] "[36mGET /static/js/RederIndividualResult.js HTTP/1.1[0m" 304 -
+2024-04-21 04:54:23,185 - INFO - Individual Prediction: Selected number of semsters: f4
+2024-04-21 04:54:23,185 - INFO - Individual Prediction: Successfully received the following marks: ['9.1', '8.5', '9.1', '9.1']
+2024-04-21 04:54:23,185 - INFO - 127.0.0.1 - - [21/Apr/2024 04:54:23] "POST /individual-prediction HTTP/1.1" 200 -
+2024-04-21 04:55:02,262 - INFO -  * Detected change in 'D:\\EduInsight\\app.py', reloading
+2024-04-21 04:55:02,546 - INFO -  * Restarting with stat
+2024-04-21 04:55:46,284 - INFO - Class Prediction: Page accessed successfully
+2024-04-21 04:55:46,321 - INFO - 127.0.0.1 - - [21/Apr/2024 04:55:46] "GET /class-prediction HTTP/1.1" 200 -
+2024-04-21 04:55:46,546 - INFO - 127.0.0.1 - - [21/Apr/2024 04:55:46] "GET /static/js/ClassPrediction.js HTTP/1.1" 200 -
+2024-04-21 04:56:28,213 - ERROR - Exception on /class-prediction [POST]
+Traceback (most recent call last):
+  File "D:\EduInsight\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\app.py", line 128, in class_prediction
+    sem_data = [clean_data(file) for file in files.values if file]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'builtin_function_or_method' object is not iterable
+2024-04-21 04:56:28,226 - INFO - 127.0.0.1 - - [21/Apr/2024 04:56:28] "[35m[1mPOST /class-prediction HTTP/1.1[0m" 500 -
+2024-04-21 04:56:28,345 - INFO - 127.0.0.1 - - [21/Apr/2024 04:56:28] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2024-04-21 04:57:08,802 - INFO - Serving on http://0.0.0.0:5000
+2024-04-21 04:57:16,780 - ERROR - Exception on /class-prediction [POST]
+Traceback (most recent call last):
+  File "D:\EduInsight\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\app.py", line 128, in class_prediction
+    sem_data = [clean_data(file) for file in files.values if file]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'builtin_function_or_method' object is not iterable
+2024-04-21 04:57:22,130 - INFO - Class Prediction: Page accessed successfully
+2024-04-21 04:57:50,570 - ERROR - Exception on /class-prediction [POST]
+Traceback (most recent call last):
+  File "D:\EduInsight\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\app.py", line 128, in class_prediction
+    sem_data = [clean_data(file) for file in files.values if file]
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'builtin_function_or_method' object is not iterable
+2024-04-21 04:58:34,853 - INFO - Serving on http://0.0.0.0:5000
+2024-04-21 04:58:40,406 - INFO - Class Prediction: Recevied following files [     StudentId                     StudentName  INT_BIT102  EXT_BIT102  INT_BIT103  ...  EXT_BIT1P4  INT_BIT1P2  EXT_BIT1P2  INT_BIT101  EXT_BIT101
+0      3736422      ADDAGATLA ADARSH VENKATESH          31          48          31  ...          20          10          12          30          43
+1      3736426  AMRITKAR  PIYUSH HARISHCHANDRA          23          49          28  ...           0           8           0          25          38
+2      3736430            BAMBALE ANANT MARUTI          16          44          28  ...          18          12          18          20          39
+3      3736432             BELOSHE TANMAY AJIT          29          52          30  ...           1          15          12          28          52
+4      3736434          /BODWADE SRUSHTI VIKAS          25          28          17  ...          20          12           0          23          36
+..         ...                             ...         ...         ...         ...  ...         ...         ...         ...         ...         ...
+272    3873260           /YADAV MANISHA SURESH          16          24          22  ...          24          19          12          20          24
+273    3890175             /YADAV NITU DEVMUNI          16          24          16  ...          12          16          12          22          24
+274    3829884       /YADAV PINKI SATYANARAYAN          16          25          16  ...          15          18          20          22          18
+275    3918303            YADAV SACHIN SANTOSH          17          34          16  ...          15          20          17          22          24
+276    4015161        SONAWANE RUSHABH SHEKHAR          16           3           2  ...           5          17          15          16           8
+
+[277 rows x 22 columns],      StudentId                     StudentName  INT_BIT202  EXT_BIT202  INT_BIT2P3  ...  EXT_BIT203  INT_BIT204  EXT_BIT204  INT_BIT201  EXT_BIT201
+0      3736422      ADDAGATLA ADARSH VENKATESH          16          17          12  ...          10          18          31          16          24
+1      3736426  AMRITKAR  PIYUSH HARISHCHANDRA           0           0           0  ...           0           0           0           0           0
+2      3736430            BAMBALE ANANT MARUTI           2          24          16  ...           3          22          25           4           4
+3      3736432             BELOSHE TANMAY AJIT          16          24          15  ...           8          17          25          16          24
+4      3736434          /BODWADE SRUSHTI VIKAS           1           5          11  ...           5           4           9           0          19
+..         ...                             ...         ...         ...         ...  ...         ...         ...         ...         ...         ...
+270    3873260           /YADAV MANISHA SURESH          16          33          10  ...          33          20          33          16          40
+271    3890175             /YADAV NITU DEVMUNI          16          26          10  ...          33          24          28          16          29
+272    3829884       /YADAV PINKI SATYANARAYAN          16          31          10  ...          39          25          26          16          37
+273    3918303            YADAV SACHIN SANTOSH          16          27          10  ...          37          24          35          16          26
+274    4015161        SONAWANE RUSHABH SHEKHAR           1           2           0  ...           1           9           6           5           0
+
+[275 rows x 22 columns],      StudentId                   StudentName  INT_BIT3P1  EXT_BIT3P1  INT_BIT303  EXT_BIT303  ...  INT_BIT302  EXT_BIT302  INT_BIT3P4  EXT_BIT3P4  INT_BIT305  EXT_BIT305
+0      4185781             CHAVAN OM VISHWAS           9          25           0           3  ...           0           0          13          28           0           5
+1      3736465           JADHAV SHUBHAM ANIL          18           0          16           0  ...          16          19           9           0          16           0
+2      3736466    JADHAV  SUDHANSHU  SANDEEP          17          20          16           7  ...          16           7          13          21          16          16
+3      3736533     SINGH SATYAPRAKASH SURESH           8           0           4           0  ...           1           0          14           0           3           0
+4      3736536  SURYAWANSHI SANIDHYA SANTOSH          13          18           6          15  ...          16          24           8          12          19          10
+..         ...                           ...         ...         ...         ...         ...  ...         ...         ...         ...         ...         ...         ...
+273    3918303          YADAV SACHIN SANTOSH          17          24          16          31  ...           9          24          14          15          21          28
+274    4654637             MOURYA ARYAN RAJU          18          24          19          25  ...           4           3          17          29          21          34
+275    4636420         /YADAV KARISHMA MUNNA          20          21          16          24  ...          26          24          17          15          18          24
+276    4015161      SONAWANE RUSHABH SHEKHAR          10          12           3           4  ...           4           4           0          10          16           5
+277    4826959           SHAIKH SUFYAN SALIM           9          12           6           4  ...          11           4          11          15          16          10
+
+[278 rows x 22 columns]]
+2024-04-21 04:58:57,316 - INFO - Class Prediction: Page accessed successfully
+2024-04-21 04:59:53,911 - INFO - Home page: Accessed Successfully
+2024-04-21 05:01:24,606 - INFO - Class Prediction: Page accessed successfully
+2024-04-21 05:01:58,159 - INFO - Class Prediction: Recevied following files [     StudentId                     StudentName  INT_BIT102  EXT_BIT102  INT_BIT103  ...  EXT_BIT1P4  INT_BIT1P2  EXT_BIT1P2  INT_BIT101  EXT_BIT101
+0      3736422      ADDAGATLA ADARSH VENKATESH          31          48          31  ...          20          10          12          30          43
+1      3736426  AMRITKAR  PIYUSH HARISHCHANDRA          23          49          28  ...           0           8           0          25          38
+2      3736430            BAMBALE ANANT MARUTI          16          44          28  ...          18          12          18          20          39
+3      3736432             BELOSHE TANMAY AJIT          29          52          30  ...           1          15          12          28          52
+4      3736434          /BODWADE SRUSHTI VIKAS          25          28          17  ...          20          12           0          23          36
+..         ...                             ...         ...         ...         ...  ...         ...         ...         ...         ...         ...
+272    3873260           /YADAV MANISHA SURESH          16          24          22  ...          24          19          12          20          24
+273    3890175             /YADAV NITU DEVMUNI          16          24          16  ...          12          16          12          22          24
+274    3829884       /YADAV PINKI SATYANARAYAN          16          25          16  ...          15          18          20          22          18
+275    3918303            YADAV SACHIN SANTOSH          17          34          16  ...          15          20          17          22          24
+276    4015161        SONAWANE RUSHABH SHEKHAR          16           3           2  ...           5          17          15          16           8
+
+[277 rows x 22 columns],      StudentId                     StudentName  INT_BIT202  EXT_BIT202  INT_BIT2P3  ...  EXT_BIT203  INT_BIT204  EXT_BIT204  INT_BIT201  EXT_BIT201
+0      3736422      ADDAGATLA ADARSH VENKATESH          16          17          12  ...          10          18          31          16          24
+1      3736426  AMRITKAR  PIYUSH HARISHCHANDRA           0           0           0  ...           0           0           0           0           0
+2      3736430            BAMBALE ANANT MARUTI           2          24          16  ...           3          22          25           4           4
+3      3736432             BELOSHE TANMAY AJIT          16          24          15  ...           8          17          25          16          24
+4      3736434          /BODWADE SRUSHTI VIKAS           1           5          11  ...           5           4           9           0          19
+..         ...                             ...         ...         ...         ...  ...         ...         ...         ...         ...         ...
+270    3873260           /YADAV MANISHA SURESH          16          33          10  ...          33          20          33          16          40
+271    3890175             /YADAV NITU DEVMUNI          16          26          10  ...          33          24          28          16          29
+272    3829884       /YADAV PINKI SATYANARAYAN          16          31          10  ...          39          25          26          16          37
+273    3918303            YADAV SACHIN SANTOSH          16          27          10  ...          37          24          35          16          26
+274    4015161        SONAWANE RUSHABH SHEKHAR           1           2           0  ...           1           9           6           5           0
+
+[275 rows x 22 columns],      StudentId                   StudentName  INT_BIT3P1  EXT_BIT3P1  INT_BIT303  EXT_BIT303  ...  INT_BIT302  EXT_BIT302  INT_BIT3P4  EXT_BIT3P4  INT_BIT305  EXT_BIT305
+0      4185781             CHAVAN OM VISHWAS           9          25           0           3  ...           0           0          13          28           0           5
+1      3736465           JADHAV SHUBHAM ANIL          18           0          16           0  ...          16          19           9           0          16           0
+2      3736466    JADHAV  SUDHANSHU  SANDEEP          17          20          16           7  ...          16           7          13          21          16          16
+3      3736533     SINGH SATYAPRAKASH SURESH           8           0           4           0  ...           1           0          14           0           3           0
+4      3736536  SURYAWANSHI SANIDHYA SANTOSH          13          18           6          15  ...          16          24           8          12          19          10
+..         ...                           ...         ...         ...         ...         ...  ...         ...         ...         ...         ...         ...         ...
+273    3918303          YADAV SACHIN SANTOSH          17          24          16          31  ...           9          24          14          15          21          28
+274    4654637             MOURYA ARYAN RAJU          18          24          19          25  ...           4           3          17          29          21          34
+275    4636420         /YADAV KARISHMA MUNNA          20          21          16          24  ...          26          24          17          15          18          24
+276    4015161      SONAWANE RUSHABH SHEKHAR          10          12           3           4  ...           4           4           0          10          16           5
+277    4826959           SHAIKH SUFYAN SALIM           9          12           6           4  ...          11           4          11          15          16          10
+
+[278 rows x 22 columns]]
+2024-04-21 05:02:24,094 - INFO - Serving on http://0.0.0.0:5000
+2024-04-21 05:02:30,110 - INFO - Class Prediction: Recevied files for 3 semesters

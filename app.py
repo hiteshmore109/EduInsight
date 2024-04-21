@@ -10,6 +10,7 @@ import pickle
 from flask import Flask, render_template, request, jsonify, send_file
 import numpy as np
 import pandas as pd
+import logging
 
 from src.DataCleaning import clean_data
 from src.FeatureExtraction import get_combined_sgpa, get_sgpa
@@ -29,10 +30,21 @@ with open("models/sem2_model.pkl", "rb") as model_file:
 app = Flask(__name__)
 
 
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(),
+        logging.FileHandler('logs.log'),
+    ]
+)
+
+
 @app.route("/", methods=["GET"])
 @app.route("/home", methods=["GET"])
 def home():
     """Render the home page."""
+    app.logger.info("Home page: Accessed Successfully")
     return render_template("index.html")
 
 
@@ -40,6 +52,7 @@ def home():
 def individual_prediction():
     """Endpoint for individual SGPA prediction."""
     if request.method == "GET":
+        app.logger.info("Individual Prediction: Accessed Successfully")
         return render_template("individual-prediction.html")
     # sem1 = request.form["sem1"]
     # sem2 = request.form["sem2"]
@@ -53,12 +66,14 @@ def individual_prediction():
     # return jsonify({"prediction": predict[0]})
     # Get the form data from the request
     form_data = request.form.to_dict()
+    app.logger.info(f"Individual Prediction: Selected number of semsters: {len(form_data)}")
 
     # Extract the semester data from the form data
-    sem_data = []
-    for value in form_data.values():
-        if value:
-            sem_data.append(value)
+    sem_data = [value for value in form_data.values() if value]
+    # for value in form_data.values():
+    #     if value:
+    #         sem_data.append(value)
+    app.logger.info(f"Individual Prediction: Successfully received the following marks: {sem_data}")
 
     # Create a dictionary with the semester data
     new_data = {f"Sem{i+1}": [sem_data[i]] for i in range(len(sem_data))}
@@ -76,16 +91,21 @@ def individual_prediction():
     else:
         model = sem5_model
 
-    # Make the prediction
-    predict = np.round(model.predict(df), decimals=1)
+    try:
+        # Make the prediction
+        predict = np.round(model.predict(df), decimals=1)
 
-    return jsonify({"prediction": predict[0]})
+        return jsonify({"prediction": predict[0]})
+    except Exception as e:
+        app.logger.error(f"Individual Prediciton: Error occured \n\t{str(e)}")
+        return jsonify({"error":str(e)}), 500
 
 
 @app.route("/class-prediction", methods=["GET", "POST"])
 def class_prediction():
     """Endpoint for class SGPA prediction."""
     if request.method == "GET":
+        app.logger.info("Class Prediction: Page accessed successfully")
         return render_template("class-prediction.html")
     # sem1 = request.files["sem1"]
     # sem2 = request.files["sem2"]
@@ -105,47 +125,54 @@ def class_prediction():
     files = request.files.to_dict()
 
     # Extract the semester data from the form data
-    sem_data = []
-    for file in files.values():
-        if file:
-            sem_data.append(clean_data(file))
+    sem_data = [clean_data(file) for file in files.values() if file]
+    # for file in files.values():
+    #     if file:
+    #         sem_data.append(clean_data(file))
+    app.logger.info(f"Class Prediction: Recevied files for {len(sem_data)} semesters")
 
-    # Create a list of DataFrames with the semester data
-    sem_sgpa = [get_sgpa(df) for df in sem_data]
+    try:
+        # Create a list of DataFrames with the semester data
+        sem_sgpa = [get_sgpa(df) for df in sem_data]
 
-    # Determine the appropriate model based on the number of semesters
-    num_semesters = len(sem_sgpa)
-    if num_semesters == 1:
-        model = sem2_model
-    elif num_semesters == 2:
-        model = sem3_model
-    elif num_semesters == 3:
-        model = sem4_model
-    else:
-        model = sem5_model
+        # Determine the appropriate model based on the number of semesters
+        num_semesters = len(sem_sgpa)
+        if num_semesters == 1:
+            model = sem2_model
+        elif num_semesters == 2:
+            model = sem3_model
+        elif num_semesters == 3:
+            model = sem4_model
+        else:
+            model = sem5_model
 
-    # Combine the semester data
-    result = get_combined_sgpa(*sem_sgpa)
+        # Combine the semester data
+        result = get_combined_sgpa(*sem_sgpa)
 
-    predict = list(np.round(model.predict(result.iloc[:, 1:]), decimals=1))
-    predict = [0 if x < 4 else x for x in predict]
-    result[f"Sem{num_semesters+1}_Predicted"] = predict
+        predict = list(np.round(model.predict(result.iloc[:, 1:]), decimals=1))
+        predict = [0 if x < 4 else x for x in predict]
+        result[f"Sem{num_semesters+1}_Predicted"] = predict
 
-    # return jsonify(result.to_dict(orient='records'))
-    result_csv = result.to_csv(index=False)  # Convert DataFrame to CSV string
+        # return jsonify(result.to_dict(orient='records'))
+        result_csv = result.to_csv(index=False)  # Convert DataFrame to CSV string
 
-    # Create an in-memory file-like object
-    csv_file = io.BytesIO(result_csv.encode())
+        # Create an in-memory file-like object
+        csv_file = io.BytesIO(result_csv.encode())
 
-    # Send the file for download
-    return send_file(
-        csv_file,
-        mimetype="text/csv",
-        as_attachment=True,
-        download_name="predicted_data.csv",
-        conditional=True,
-    )
+        # Send the file for download
+        return send_file(
+            csv_file,
+            mimetype="text/csv",
+            as_attachment=True,
+            download_name="predicted_data.csv",
+            conditional=True,
+        )
+    
+    except Exception as e:
+        app.logger.error(f"Class predicition: Error Occured \n\t {str(e)}")
+        return jsonify({"error": str(e)}), 500
 
 
 if __name__ == "__main__":
+    app.logger.info("Starting the Flask application....")
     app.run(host="0.0.0.0", port=5000, debug=False)
