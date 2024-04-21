@@ -32,11 +32,11 @@ app = Flask(__name__)
 
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
+    format="%(asctime)s - %(levelname)s - %(message)s",
     handlers=[
         logging.StreamHandler(),
-        logging.FileHandler('logs.log'),
-    ]
+        logging.FileHandler("logs.log"),
+    ],
 )
 
 
@@ -66,14 +66,18 @@ def individual_prediction():
     # return jsonify({"prediction": predict[0]})
     # Get the form data from the request
     form_data = request.form.to_dict()
-    app.logger.info(f"Individual Prediction: Selected number of semsters: {len(form_data)}")
+    app.logger.info(
+        f"Individual Prediction: Selected number of semsters: {len(form_data)}"
+    )
 
     # Extract the semester data from the form data
     sem_data = [value for value in form_data.values() if value]
     # for value in form_data.values():
     #     if value:
     #         sem_data.append(value)
-    app.logger.info(f"Individual Prediction: Successfully received the following marks: {sem_data}")
+    app.logger.info(
+        f"Individual Prediction: Successfully received the following marks: {sem_data}"
+    )
 
     # Create a dictionary with the semester data
     new_data = {f"Sem{i+1}": [sem_data[i]] for i in range(len(sem_data))}
@@ -98,7 +102,7 @@ def individual_prediction():
         return jsonify({"prediction": predict[0]})
     except Exception as e:
         app.logger.error(f"Individual Prediciton: Error occured \n\t{str(e)}")
-        return jsonify({"error":str(e)}), 500
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route("/class-prediction", methods=["GET", "POST"])
@@ -124,14 +128,25 @@ def class_prediction():
     # Get the form data from the request
     files = request.files.to_dict()
 
-    # Extract the semester data from the form data
-    sem_data = [clean_data(file) for file in files.values() if file]
-    # for file in files.values():
-    #     if file:
-    #         sem_data.append(clean_data(file))
-    app.logger.info(f"Class Prediction: Recevied files for {len(sem_data)} semesters")
-
     try:
+        # Check that each file is of type CSV
+        for file in files.values():
+            if not file or not file.filename.endswith(".csv"):
+                return (
+                    jsonify(
+                        {"error": "Invalid file type. Only CSV files are allowed."}
+                    ),
+                    400,
+                )
+        # Extract the semester data from the form data
+        sem_data = [clean_data(file) for file in files.values() if file]
+        # for file in files.values():
+        #     if file:
+        #         sem_data.append(clean_data(file))
+        app.logger.info(
+            f"Class Prediction: Recevied files for {len(sem_data)} semesters"
+        )
+
         # Create a list of DataFrames with the semester data
         sem_sgpa = [get_sgpa(df) for df in sem_data]
 
@@ -167,7 +182,7 @@ def class_prediction():
             download_name="predicted_data.csv",
             conditional=True,
         )
-    
+
     except Exception as e:
         app.logger.error(f"Class predicition: Error Occured \n\t {str(e)}")
         return jsonify({"error": str(e)}), 500
@@ -175,4 +190,4 @@ def class_prediction():
 
 if __name__ == "__main__":
     app.logger.info("Starting the Flask application....")
-    app.run(host="0.0.0.0", port=5000, debug=False)
+    app.run(host="0.0.0.0", port=5000, debug=True)

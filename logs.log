@@ -165,3 +165,104 @@ TypeError: 'builtin_function_or_method' object is not iterable
 [278 rows x 22 columns]]
 2024-04-21 05:02:24,094 - INFO - Serving on http://0.0.0.0:5000
 2024-04-21 05:02:30,110 - INFO - Class Prediction: Recevied files for 3 semesters
+2024-04-22 04:22:22,627 - INFO - Serving on http://0.0.0.0:5000
+2024-04-22 04:22:49,806 - INFO - Home page: Accessed Successfully
+2024-04-22 04:23:19,343 - INFO - Individual Prediction: Accessed Successfully
+2024-04-22 04:23:36,021 - INFO - Individual Prediction: Selected number of semsters: 3
+2024-04-22 04:23:36,021 - INFO - Individual Prediction: Successfully received the following marks: ['9.1', '8.5', '0']
+2024-04-22 04:24:03,894 - INFO - Individual Prediction: Selected number of semsters: 3
+2024-04-22 04:24:03,894 - INFO - Individual Prediction: Successfully received the following marks: ['9.1', '8.5', '9.1']
+2024-04-22 04:24:43,081 - INFO - Class Prediction: Page accessed successfully
+2024-04-22 04:25:57,578 - ERROR - Exception on /class-prediction [POST]
+Traceback (most recent call last):
+  File "D:\EduInsight\venv\Lib\site-packages\flask\app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\flask\app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\flask\app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\flask\app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\app.py", line 132, in class_prediction
+    sem_data = [clean_data(file) for file in files.values() if file]
+                ^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\src\DataCleaning.py", line 87, in clean_data
+    df = pd.read_csv(file)
+         ^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 948, in read_csv
+    return _read(filepath_or_buffer, kwds)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 611, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1448, in __init__
+    self._engine = self._make_engine(f, self.engine)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\pandas\io\parsers\readers.py", line 1723, in _make_engine
+    return mapping[engine](f, **self.options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\EduInsight\venv\Lib\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 93, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "parsers.pyx", line 579, in pandas._libs.parsers.TextReader.__cinit__
+  File "parsers.pyx", line 668, in pandas._libs.parsers.TextReader._get_header
+  File "parsers.pyx", line 879, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "parsers.pyx", line 890, in pandas._libs.parsers.TextReader._check_tokenize_status
+  File "parsers.pyx", line 2050, in pandas._libs.parsers.raise_parser_error
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x87 in position 18: invalid start byte
+2024-04-22 04:33:42,731 - INFO - Starting the Flask application....
+2024-04-22 04:33:42,790 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.106:5000
+2024-04-22 04:33:42,791 - INFO - [33mPress CTRL+C to quit[0m
+2024-04-22 04:33:42,793 - INFO -  * Restarting with stat
+2024-04-22 04:33:43,744 - INFO - Starting the Flask application....
+2024-04-22 04:33:43,777 - WARNING -  * Debugger is active!
+2024-04-22 04:33:43,781 - INFO -  * Debugger PIN: 124-672-160
+2024-04-22 04:33:48,992 - INFO - Home page: Accessed Successfully
+2024-04-22 04:33:49,005 - INFO - 127.0.0.1 - - [22/Apr/2024 04:33:49] "GET / HTTP/1.1" 200 -
+2024-04-22 04:33:53,666 - INFO - Class Prediction: Page accessed successfully
+2024-04-22 04:33:53,668 - INFO - 127.0.0.1 - - [22/Apr/2024 04:33:53] "GET /class-prediction HTTP/1.1" 200 -
+2024-04-22 04:33:53,733 - INFO - 127.0.0.1 - - [22/Apr/2024 04:33:53] "GET /static/js/ClassPrediction.js HTTP/1.1" 200 -
+2024-04-22 04:34:48,644 - INFO - Class Prediction: Page accessed successfully
+2024-04-22 04:34:48,645 - INFO - 127.0.0.1 - - [22/Apr/2024 04:34:48] "GET /class-prediction HTTP/1.1" 200 -
+2024-04-22 04:34:48,669 - INFO - 127.0.0.1 - - [22/Apr/2024 04:34:48] "[36mGET /static/js/ClassPrediction.js HTTP/1.1[0m" 304 -
+2024-04-22 04:34:48,693 - INFO - 127.0.0.1 - - [22/Apr/2024 04:34:48] "[36mGET /static/favicon.ico HTTP/1.1[0m" 304 -
+2024-04-22 04:36:56,819 - INFO - Starting the Flask application....
+2024-04-22 04:36:56,871 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.106:5000
+2024-04-22 04:36:56,872 - INFO - [33mPress CTRL+C to quit[0m
+2024-04-22 04:36:56,873 - INFO -  * Restarting with stat
+2024-04-22 04:36:57,871 - INFO - Starting the Flask application....
+2024-04-22 04:36:57,909 - WARNING -  * Debugger is active!
+2024-04-22 04:36:57,909 - INFO -  * Debugger PIN: 124-672-160
+2024-04-22 04:37:01,922 - INFO - Home page: Accessed Successfully
+2024-04-22 04:37:01,938 - INFO - 127.0.0.1 - - [22/Apr/2024 04:37:01] "GET / HTTP/1.1" 200 -
+2024-04-22 04:37:06,589 - INFO - Class Prediction: Page accessed successfully
+2024-04-22 04:37:06,595 - INFO - 127.0.0.1 - - [22/Apr/2024 04:37:06] "GET /class-prediction HTTP/1.1" 200 -
+2024-04-22 04:37:06,653 - INFO - 127.0.0.1 - - [22/Apr/2024 04:37:06] "[36mGET /static/js/ClassPrediction.js HTTP/1.1[0m" 304 -
+2024-04-22 04:38:28,734 - INFO - Starting the Flask application....
+2024-04-22 04:38:28,791 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.106:5000
+2024-04-22 04:38:28,792 - INFO - [33mPress CTRL+C to quit[0m
+2024-04-22 04:38:28,794 - INFO -  * Restarting with stat
+2024-04-22 04:38:29,739 - INFO - Starting the Flask application....
+2024-04-22 04:38:29,780 - WARNING -  * Debugger is active!
+2024-04-22 04:38:29,780 - INFO -  * Debugger PIN: 124-672-160
+2024-04-22 04:38:33,035 - INFO - 127.0.0.1 - - [22/Apr/2024 04:38:33] "GET /static/js/ClassPrediction.js HTTP/1.1" 200 -
+2024-04-22 04:38:57,367 - INFO - Class Prediction: Page accessed successfully
+2024-04-22 04:38:57,373 - INFO - 127.0.0.1 - - [22/Apr/2024 04:38:57] "GET /class-prediction HTTP/1.1" 200 -
+2024-04-22 04:38:57,386 - INFO - 127.0.0.1 - - [22/Apr/2024 04:38:57] "[36mGET /static/js/ClassPrediction.js HTTP/1.1[0m" 304 -
+2024-04-22 04:38:57,426 - INFO - 127.0.0.1 - - [22/Apr/2024 04:38:57] "[36mGET /static/favicon.ico HTTP/1.1[0m" 304 -
+2024-04-22 04:39:28,731 - INFO - Class Prediction: Recevied files for 3 semesters
+2024-04-22 04:39:28,794 - INFO - 127.0.0.1 - - [22/Apr/2024 04:39:28] "POST /class-prediction HTTP/1.1" 200 -
